@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Voxel
@@ -7,37 +8,41 @@ namespace Voxel
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Voxel/New Atlas", order = 1)]
     public class AtlasSO : ScriptableObject
     {
-        [ContextMenuItem("Generate Material", "GenerateAtlas")]
+        [Header("Settings")]
         public Material material;
+
+        [HideInInspector] public Texture2D atlasTexture;
 
         public Dictionary<string, Vector2> uvs;
 
-        private Texture2D[] _textures;
+        [HideInInspector]
+        public Texture2D[] textures;
         
+        [HideInInspector]
         public int dimensions = 0;
 
         private const int TextureWidth = 16;
         private const int TextureHeight = 16;
 
-        private const string TexturePath = "Materials/Textures/Voxel.png";
+        private const string TexturePath = "Assets/Resources/Materials/Textures/Voxel.asset";
         
-        private void GenerateAtlas()
+        public void GenerateAtlas()
         {
             uvs = new Dictionary<string, Vector2>();
-            _textures = Resources.LoadAll<Texture2D>("Atlas");
+            textures = Resources.LoadAll<Texture2D>("Atlas");
             
-            var textureCount = _textures.Length;
+            var textureCount = textures.Length;
 
             dimensions = GetAtlasDimension(textureCount);
 
-            var atlasTexture = new Texture2D(TextureWidth * dimensions, TextureHeight * dimensions)
+            atlasTexture = new Texture2D(TextureWidth * dimensions, TextureHeight * dimensions)
             {
                 anisoLevel = 1,
                 filterMode = FilterMode.Point
             };
 
-            for (var i = 0; i < _textures.Length; i++) {
-                var texture = _textures[i];
+            for (var i = 0; i < textures.Length; i++) {
+                var texture = textures[i];
 
                 var horizontalAtlasOffset = (i % dimensions) * TextureWidth;
                 var verticalAtlasOffset = (i / dimensions) * TextureHeight;
@@ -61,18 +66,10 @@ namespace Voxel
             }
             atlasTexture.Apply();
             
-            SaveTextureAsPng(atlasTexture);
+            AssetDatabase.CreateAsset(atlasTexture, TexturePath);
             material.mainTexture = atlasTexture;
         }
-
-        private static void SaveTextureAsPng(Texture2D texture)
-        {
-            var fullPath = $"{Application.dataPath}/Resources/{TexturePath}";
-            var bytes = texture.EncodeToPNG();
-
-            System.IO.File.WriteAllBytes(fullPath, bytes);
-        }
-
+        
         private static int GetAtlasDimension(int count) => (int)Mathf.Pow(2, Mathf.Ceil(Mathf.Log(count) / Mathf.Log(4)));
     }
 }
