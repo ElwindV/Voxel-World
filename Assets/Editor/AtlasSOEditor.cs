@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using Voxel;
+using Voxel.Config;
 
 namespace Editor
 {
