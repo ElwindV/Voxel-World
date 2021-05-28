@@ -1,0 +1,114 @@
+{
+    "blocks": [
+        {
+            "id": 0,
+            "name": "Air",
+            "transparent": true,
+            "textures": {
+                "top": null,
+                "side": null,
+                "bottom": null
+            }
+        },
+        {
+            "id": 1,
+            "name": "Stone",
+            "transparent": false,
+            "textures": {
+                "top": "stone",
+                "side": "stone",
+                "bottom": "stone"
+            }
+        },
+        {
+            "id": 2,
+            "name": "Dirt",
+            "transparent": false,
+            "textures": {
+                "top": "dirt",
+                "side": "dirt",
+                "bottom": "dirt"
+            }
+        },
+        {
+            "id": 3,
+            "name": "Grass",
+            "transparent": false,
+            "textures": {
+                "top": "grass-top",
+                "side": "grass-side",
+                "bottom": "dirt"
+            }
+        },
+        {
+            "id": 4,
+            "name": "Bedrock",
+            "transparent": false,
+            "textures": {
+                "top": "bedrock",
+                "side": "bedrock",
+                "bottom": "bedrock"
+            }
+        },
+        {
+            "id": 5,
+            "name": "Log",
+            "transparent": false,
+            "textures": {
+                "top": "log-top",
+                "side": "log-side",
+                "bottom": "log-top"
+            }
+        },
+        {
+            "id": 6,
+            "name": "Leaf",
+            "transparent": false,
+            "textures": {
+                "top": "leaf",
+                "side": "leaf",
+                "bottom": "leaf"
+            }
+        },
+        {
+            "id": 7,
+            "name": "Wood",
+            "transparent": false,
+            "textures": {
+                "top": "wood",
+                "side": "wood",
+                "bottom": "wood"
+            }
+        },
+        {
+            "id": 8,
+            "name": "Water",
+            "transparent": true,
+            "textures": {
+                "top": "water",
+                "side": "water",
+                "bottom": "water"
+            }
+        },
+        {
+            "id": 9,
+            "name": "Sand",
+            "transparent": false,
+            "textures": {
+                "top": "sand",
+                "side": "sand",
+                "bottom": "sand"
+            }
+        },
+        {
+            "id": 10,
+            "name": "Snow",
+            "transparent": false,
+            "textures": {
+                "top": "snow",
+                "side": "snow",
+                "bottom": "snow"
+            }
+        }
+    ]
+}
