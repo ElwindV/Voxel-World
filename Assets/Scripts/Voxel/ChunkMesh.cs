@@ -14,12 +14,20 @@ namespace Voxel
         private MeshFilter _meshFilter;
         private MeshRenderer _meshRenderer;
         private MeshCollider _meshCollider;
-        private Material _material;
-
+        
         private List<Vector3> _vertexList;
         private List<int> _triangleList;
         private List<Vector3> _normalList;
         private List<Vector2> _uvList;
+        
+        private GameObject _waterObject;
+        private MeshFilter _waterMeshFilter;
+        private MeshRenderer _waterMeshRenderer;
+        
+        private List<Vector3> _waterVertexList;
+        private List<int> _waterTriangleList;
+        private List<Vector3> _waterNormalList;
+        private List<Vector2> _waterUvList;
         
         [HideInInspector]
         public Chunk leftChunk;
@@ -35,9 +43,15 @@ namespace Voxel
             _meshFilter = gameObject.AddComponent<MeshFilter>();
             _meshRenderer = gameObject.AddComponent<MeshRenderer>();
             _meshCollider = gameObject.AddComponent<MeshCollider>();
-            _material = atlas.material;
-
             _meshRenderer.sharedMaterial = atlas.material;
+            
+            _waterObject = new GameObject();
+            _waterObject.transform.parent = transform;
+            _waterObject.name = "Water";
+            _waterObject.transform.localPosition = Vector3.zero;
+            _waterMeshFilter = _waterObject.AddComponent<MeshFilter>();
+            _waterMeshRenderer = _waterObject.AddComponent<MeshRenderer>();
+            _waterMeshRenderer.sharedMaterial = atlas.waterMaterial;
 
             leftChunk = (chunk.chunkX - 1 >= 0)
                 ? VoxelManager.instance.chunks[chunk.chunkX - 1, chunk.chunkZ]
@@ -56,11 +70,17 @@ namespace Voxel
         public void Create()
         {
             var mesh = new Mesh();
+            var waterMesh = new Mesh();
 
             _vertexList = new List<Vector3>();
             _triangleList = new List<int>();
             _normalList = new List<Vector3>();
             _uvList = new List<Vector2>();
+            
+            _waterVertexList = new List<Vector3>();
+            _waterTriangleList = new List<int>();
+            _waterNormalList = new List<Vector3>();
+            _waterUvList = new List<Vector2>();
             
             for (var x = 0; x < chunk.ChunkWidth; x++)
             {
@@ -105,6 +125,12 @@ namespace Voxel
             mesh.normals = _normalList.ToArray();
             mesh.uv = _uvList.ToArray();
             _meshCollider.sharedMesh = mesh;
+            
+            _waterMeshFilter.mesh = waterMesh;
+            waterMesh.vertices = _waterVertexList.ToArray();
+            waterMesh.triangles = _waterTriangleList.ToArray();
+            waterMesh.normals = _waterNormalList.ToArray();
+            waterMesh.uv = _waterUvList.ToArray();
         }
 
         private void AddVertices(ref Blocks block, ref Blocks neighborBlock, ref Vector3 currentPosition, Sides side, Vector3 normal)
@@ -119,39 +145,75 @@ namespace Voxel
                 return;
             }
             
-            var size = _vertexList.Count;
+            var isWater = block == Blocks.Water;
+            var size = isWater ? _waterVertexList.Count : _vertexList.Count;
             
             var directions = GetDirections(side);
-
-            foreach (var direction in directions)
+            if (isWater)
             {
-                _vertexList.Add(currentPosition + direction);
+                foreach (var direction in directions)
+                {
+                    _waterVertexList.Add(currentPosition + direction);
+                }
+            }
+            else
+            {
+                foreach (var direction in directions)
+                {
+                    _vertexList.Add(currentPosition + direction);
+                }
             }
 
-            AddFaceNormals(normal);
-            AddTriangles(size);
-            AddUVs(block, side);
+            AddFaceNormals(normal, isWater);
+            AddTriangles(size, isWater);
+            AddUVs(block, side, isWater);
         }
         
-        private void AddFaceNormals(Vector3 direction)
+        private void AddFaceNormals(Vector3 direction, bool isWater = false)
         {
             for (var i = 0; i < 4; i++)
             {
+                if (isWater)
+                {
+                    _waterNormalList.Add(direction);
+                    continue;
+                }
+
                 _normalList.Add(direction);
             }
         }
         
-        private void AddTriangles(int baseVertexNumber)
+        private void AddTriangles(int baseVertexNumber, bool isWater = false)
         {
             int[] offsets = {0, 3, 1, 0, 2, 3};
+            
+            if (isWater) 
+            {
+                foreach (var i in offsets) 
+                {
+                    _waterTriangleList.Add(baseVertexNumber + i);
+                }
+
+                return;
+            }
 
             foreach (var offset in offsets) {
                 _triangleList.Add(baseVertexNumber + offset);
             }
         }
         
-        private void AddUVs(Blocks block, Sides side)
+        private void AddUVs(Blocks block, Sides side, bool isWater = false)
         {
+            if (isWater)
+            {
+                _waterUvList.Add(Vector2.zero);
+                _waterUvList.Add(Vector2.right);
+                _waterUvList.Add(Vector2.up);
+                _waterUvList.Add(Vector2.right + Vector2.up);
+
+                return;
+            }
+            
             var blockData = VoxelManager.instance.blockData[block.ToString()];
             var texture = side switch
             {

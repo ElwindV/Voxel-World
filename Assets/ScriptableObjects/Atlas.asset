@@ -13,4 +13,19 @@ MonoBehaviour:
   m_Name: Atlas
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: c90f593c1850fd343aa8472cc31c41e0, type: 2}
+  waterMaterial: {fileID: 2100000, guid: 2f243cb7764c58f41af4ef6d6248a5c2, type: 2}
+  atlasTexture: {fileID: 2800000, guid: 47541470194b6914aa89b7ba6caf1aab, type: 2}
+  textures:
+  - {fileID: 2800000, guid: 096abab72891afe49a09b1ea7e42d8f2, type: 3}
+  - {fileID: 2800000, guid: d6e8e4329d1a5d242a7ff64db84e1b7e, type: 3}
+  - {fileID: 2800000, guid: 0c6b01933d9de144ebb99c7f766f7e22, type: 3}
+  - {fileID: 2800000, guid: e979fd7a333e08d4c95bf714cf1a93ee, type: 3}
+  - {fileID: 2800000, guid: 997e6682527cfdf4e8a32c5735b02e61, type: 3}
+  - {fileID: 2800000, guid: c0ce686c8b5b15845ae3b42dc0dee20e, type: 3}
+  - {fileID: 2800000, guid: 08616cf49b2ec8d45ac0c734c8f272b8, type: 3}
+  - {fileID: 2800000, guid: 72ea19d44a13d8749b486b9ab8001342, type: 3}
+  - {fileID: 2800000, guid: 0b101c8072c54234ba36216ba94d992c, type: 3}
+  - {fileID: 2800000, guid: 57b988a082585e246ae527ab9e1da95a, type: 3}
+  - {fileID: 2800000, guid: 467015fbbfc99bc40923dc7febc7936f, type: 3}
+  - {fileID: 2800000, guid: 5dae0153dbb86a14abae95bbf8426737, type: 3}
   dimensions: 4

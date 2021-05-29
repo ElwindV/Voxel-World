@@ -10,6 +10,8 @@ namespace Voxel.Config
         [Header("Settings")]
         public Material material;
 
+        public Material waterMaterial;
+
         [HideInInspector] public Texture2D atlasTexture;
 
         public Dictionary<string, Vector2> uvs;
