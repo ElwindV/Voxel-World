@@ -21,19 +21,30 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Water
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: aa7ee09a9081c6a4ab359ec016e0c056, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_373d40fbcb6c41e08a135e19bf596d6e:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_7397ede0868f40b69c63992e9173407d:
+        m_Texture: {fileID: 2800000, guid: cf52216ba9631824cb2e41627ce516e9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_ec8c6f16d9d345e7b18907af722d3749:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -91,6 +102,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_3c16f9591a864917ae05dac60c6fb6ba: 0
+    - Vector1_5567951c30c040888c5059c583746106: 0.2
+    - Vector1_7e666a9dcd0a4028a3d220ad91ad1eb9: 0
+    - Vector1_7f942d260dab4a4b80cd29700031b8b5: 3
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -118,6 +133,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
+    - Color_0491b330a6a0444b8b0cfb1c0f32de44: {r: 0.24705878, g: 0.31764704, b: 0.7058823, a: 0.9019608}
+    - Color_1702235eedf94db69bca45c7da9319fd: {r: 0, g: 0.6862745, b: 1, a: 0.69803923}
+    - Color_df37a0ca1a6648f6b1aa2bcbcda5d440: {r: 1, g: 1, b: 1, a: 1}
+    - Vector4_509bd74902ff4302a374a4b868d54731: {r: 0, g: 0, b: 0, a: 0}
+    - Vector4_5998c53d9bc046bc9409a44bb295a5f1: {r: 0, g: 0, b: 0, a: 0}
+    - Vector4_84e4c9594acf43729aec1b8bc964da66: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 0, g: 0.7605362, b: 1, a: 0.77254903}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
